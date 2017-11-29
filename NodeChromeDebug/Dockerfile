@@ -18,13 +18,13 @@ RUN apt-get update -qqy \
 #=================
 # Locale settings
 #=================
-ENV LANGUAGE en_US.UTF-8
-ENV LANG en_US.UTF-8
-RUN locale-gen en_US.UTF-8 \
+ENV LANGUAGE zh_CN.UTF-8
+ENV LANG zh_CN.UTF-8
+RUN locale-gen zh_CN.UTF-8 \
   && dpkg-reconfigure --frontend noninteractive locales \
   && apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install \
-    language-pack-en \
+    language-pack-zh-han* \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 #=======
@@ -47,7 +47,13 @@ RUN apt-get update -qqy \
   && apt-get -qqy install \
     fluxbox \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
-
+  
+#=========timezone=============
+ENV TZ "Asia/Shanghai"
+RUN echo "${TZ}" > /etc/timezone \
+  && dpkg-reconfigure --frontend noninteractive tzdata
+  
+  
 USER seluser
 
 #==============================
