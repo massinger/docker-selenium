@@ -1,6 +1,10 @@
-FROM ubuntu:16.04
+FROM ubuntu_chinese
 LABEL authors="Selenium <selenium-developers@googlegroups.com>"
-
+RUN apt-get update
+RUN apt-get install  language-pack-zh-han*
+RUN apt-get install   language-pack-gnome-zh-han*
+RUN apt-get install   language-pack-kde-zh-han*
+RUN apt install $(check-language-support)
 #================================================
 # Customize sources for apt-get
 #================================================
@@ -14,9 +18,6 @@ ENV DEBIAN_FRONTEND=noninteractive \
 	
 # Ensure UTF-8 locale，support_chinese
 #COPY locale /etc/default/locale
-RUN locale-gen zh_CN.UTF-8 &&\
-  DEBIAN_FRONTEND=noninteractive dpkg-reconfigure locales
-RUN locale-gen zh_CN.UTF-8  
 ENV LANG zh_CN.UTF-8  
 ENV LANGUAGE zh_CN:zh  
 ENV LC_ALL zh_CN.UTF-8  
@@ -41,7 +42,7 @@ RUN apt-get -qqy update \
 # Timezone settings
 # Possible alternative: https://github.com/docker/docker/issues/3359#issuecomment-32150214
 #===================
-ENV TZ "UTC"
+ENV TZ "Asia/Shanghai"
 RUN echo "${TZ}" > /etc/timezone \
   && dpkg-reconfigure --frontend noninteractive tzdata
 
