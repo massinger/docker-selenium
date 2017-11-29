@@ -1,9 +1,9 @@
 FROM ubuntu:16.04
 LABEL authors="Selenium <selenium-developers@googlegroups.com>"
 RUN apt-get update
-RUN apt-get install  language-pack-zh-han*
-RUN apt-get install   language-pack-gnome-zh-han*
-RUN apt-get install   language-pack-kde-zh-han*
+RUN apt-get -qqy install  language-pack-zh-han*
+RUN apt-get -qqy  install   language-pack-gnome-zh-han*
+RUN apt-get -qqy  install   language-pack-kde-zh-han*
 RUN apt install $(check-language-support)
 #================================================
 # Customize sources for apt-get
