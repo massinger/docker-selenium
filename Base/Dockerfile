@@ -1,4 +1,4 @@
-FROM ubuntu_chinese
+FROM ubuntu:16.04
 LABEL authors="Selenium <selenium-developers@googlegroups.com>"
 RUN apt-get update
 RUN apt-get install  language-pack-zh-han*
