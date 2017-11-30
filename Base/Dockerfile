@@ -1,10 +1,6 @@
 FROM ubuntu:16.04
 LABEL authors="Selenium <selenium-developers@googlegroups.com>"
-RUN apt-get update
-RUN apt-get -qqy install  language-pack-zh-han*
-RUN apt-get -qqy  install   language-pack-gnome-zh-han*
-RUN apt-get -qqy  install   language-pack-kde-zh-han*
-RUN apt install $(check-language-support)
+
 #================================================
 # Customize sources for apt-get
 #================================================
@@ -15,12 +11,6 @@ RUN  echo "deb http://archive.ubuntu.com/ubuntu xenial main universe\n" > /etc/a
 # No interactive frontend during docker build
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true
-	
-# Ensure UTF-8 locale，support_chinese
-#COPY locale /etc/default/locale
-ENV LANG zh_CN.UTF-8  
-ENV LANGUAGE zh_CN:zh  
-ENV LC_ALL zh_CN.UTF-8  
 
 #========================
 # Miscellaneous packages
@@ -42,7 +32,7 @@ RUN apt-get -qqy update \
 # Timezone settings
 # Possible alternative: https://github.com/docker/docker/issues/3359#issuecomment-32150214
 #===================
-ENV TZ "Asia/Shanghai"
+ENV TZ "UTC"
 RUN echo "${TZ}" > /etc/timezone \
   && dpkg-reconfigure --frontend noninteractive tzdata
 
