@@ -27,16 +27,15 @@ RUN locale-gen zh_CN.UTF-8 \
     language-pack-zh-han* \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
+
 #=======
 # Fonts
 #=======
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install \
-    fonts-ipafont-gothic \
-    xfonts-100dpi \
-    xfonts-75dpi \
-    xfonts-cyrillic \
-    xfonts-scalable \
+    ttf-wqy-microhei \
+    ttf-wqy-zenhei\
+    xfonts-wqy\
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 #=========
